@@ -7,9 +7,9 @@
     let mean = 0;
     let mode = 0;
     let median = 0;
-    var length1 = 0;
-    var length2 = 0;
-    var length3 = 0;
+    let length1 = 0;
+    let length2 = 0;
+    let length3 = 0;
     let numFound = 0;
     const rollList = {};
     const rollList2 = {};
@@ -48,7 +48,7 @@ finalCheck();
 
 function rollListingDie1()
 {
-var length = 0;
+let length = 0;
 amount = parseInt(document.getElementById("dice").value);
 for (i = 0; i < amount; i++)
 {
@@ -73,7 +73,7 @@ length1 = length;
 
 function rollListingDie2()
 {
-var length = 0;
+let length = 0;
 amount = parseInt(document.getElementById("dice").value);
 for (i = 0; i < amount; i++)
 {
@@ -97,7 +97,7 @@ length2 = length;
 
 function rollListingDie3()
 {
-var length = 0;
+let length = 0;
 amount = parseInt(document.getElementById("dice").value);
 for (i = 0; i < amount; i++)
 {
@@ -174,7 +174,7 @@ document.querySelector("#doubleRoll").innerHTML = "Double Rolls: " + doubleroll;
 
 function findMean()
 {
-var number = 0;
+let number = 0;
 if (num === 3)
 {
 for (let i = 0; i < amount; i++)
@@ -320,7 +320,7 @@ if ((six > two) && (six > three) && (six > four) && (six > five) && (one < six))
 
 function findFrequency(value)
 {
-var num  = 0;
+let num  = 0;
 for (let i = 0; i < rollList.length; i++)
 {
 if (rollList[i] === value) {
@@ -333,13 +333,13 @@ return frequency;
 function reset()
 {
 const rollList = {};
-var amount = 0;
-var mean = 0;
-var median = 0;
-var mode = 0;
-var frequency = 0;
-var doubleRoll = 0;
-var tripleRoll = 0;
+let amount = 0;
+let mean = 0;
+let median = 0;
+let mode = 0;
+let frequency = 0;
+let doubleRoll = 0;
+let tripleRoll = 0;
 }
 
 
