@@ -1,0 +1,735 @@
+</head>
+<script>
+    let doubleroll = 0;
+    let tripleroll = 0;
+    let amount = 0;
+    let num = 0;
+    let mean = 0;
+    let mode = 0;
+    let median = 0;
+    var length1 = 0;
+    var length2 = 0;
+    var length3 = 0;
+    let numFound = 0;
+    const rollList = {};
+    const rollList2 = {};
+    const rollList3 = {};
+    let one = 0; let two =0; let three = 0; let four = 0; let five = 0; let six = 0;
+
+
+
+
+function checkDie()
+{
+num = parseInt(document.getElementById("threeDice").value);
+if (num === 1)
+{
+    rollListingDie1();
+}
+
+
+if (num === 2)
+{
+    rollListingDie1();
+    rollListingDie2();
+}
+
+
+if (num === 3)
+{
+    rollListingDie1();
+    rollListingDie2();
+    rollListingDie3();
+}
+finalCheck();
+}
+
+
+
+function rollListingDie1()
+{
+var length = 0;
+amount = parseInt(document.getElementById("dice").value);
+for (i = 0; i < amount; i++)
+{
+    rollList[i] = parseInt(Math.random()*6+1);
+    length++;
+    numFound = rollList[i];
+    findMode();
+    if (length >= 2 && (rollList[i] === rollList[i-1]))
+    {
+        doubleroll++;
+       
+    }
+    if (length >=3 && ((rollList[i] === rollList[i-1]) && rollList[i] === rollList[i-2])) {
+        tripleroll++;
+        doubleroll = doubleroll - 2;
+       
+    }
+}
+length1 = length;
+}
+
+
+function rollListingDie2()
+{
+var length = 0;
+amount = parseInt(document.getElementById("dice").value);
+for (i = 0; i < amount; i++)
+{
+    rollList2[i] = parseInt(Math.random()*6+1);
+    length++;
+    numFound = rollList[i];
+    findMode();
+    if (length >= 2 && (rollList2[i] === rollList2[i-1]))
+    {
+        doubleroll++;
+       
+    }
+    if (length >=3 && ((rollList2[i] === rollList2[i-1]) && rollList2[i] === rollList2[i-2])) {
+        tripleroll++;
+       
+    }
+}
+length2 = length;
+}
+
+
+function rollListingDie3()
+{
+var length = 0;
+amount = parseInt(document.getElementById("dice").value);
+for (i = 0; i < amount; i++)
+{
+    rollList3[i] = parseInt(Math.random()*6+1);
+    length++;
+    numFound = rollList[i];
+    findMode();
+    if (length >= 2 && (rollList3[i] === rollList3[i-1]))
+    {
+        doubleroll++;
+       
+    }
+    if (length >=3 && ((rollList3[i] === rollList3[i-1]) && rollList3[i] === rollList3[i-2])) {
+        tripleroll++;
+       
+    }
+}
+length3 = length;
+}
+
+
+
+
+function finalCheck() {
+
+
+let resul1 = "";
+for (let i = 0; i < amount; i++)
+{
+resul1+="Dice #" + (i+1) + " : " + rollList[i];
+resul1+="</br>";  
+}
+document.querySelector("#result1").innerHTML = resul1;
+if (num >= 2) {
+let resul2 = "";
+for (let i = 0; i < amount; i++)
+{
+resul2+="Dice #" + (i+1) + " : " + rollList2[i];
+resul2+="</br>";  
+}
+document.querySelector("#result2").innerHTML = resul2;
+}
+if (num === 3) {
+let resul3 = "";
+for (let i = 0; i < amount; i++)
+{
+resul3+="Dice #" + (i+1) + " : " + rollList3[i];
+resul3+="</br>";  
+}
+document.querySelector("#result3").innerHTML = resul3;
+}
+findMean();
+findMode();
+findMedian();
+
+
+
+
+
+
+document.querySelector("#mean").innerHTML = "Mean Value: " + mean;
+document.querySelector("#median").innerHTML = "Median Value: " + median;
+document.querySelector("#mode").innerHTML = "Mode Value: " + mode;
+document.querySelector("#tripleRoll").innerHTML = "Triple Rolls: " + tripleroll;
+document.querySelector("#doubleRoll").innerHTML = "Double Rolls: " + doubleroll;
+
+
+}
+
+
+
+
+
+
+function findMean()
+{
+var number = 0;
+if (num === 3)
+{
+for (let i = 0; i < amount; i++)
+{
+  number+=rollList[i];
+  number+=rollList2[i];
+  number+=rollList3[i];
+}
+mean = number / (amount * 3);
+}
+
+if (num === 2)
+{
+for (let i = 0; i < amount; i++)
+{
+  number+=rollList[i];
+  number+=rollList[i];
+}
+mean = number / (amount * 2);
+}
+
+
+if (num === 1)
+{
+for (let i = 0; i < amount; i++)
+{
+  number+=rollList[i];
+}
+mean = number / amount;
+}
+}
+
+
+
+
+
+
+//fixed
+function findMedian()
+{
+
+if (num === 1)
+{
+if (length1 % 2 === 0)
+{
+median = (rollList[(length1/2 + 1)] + rollList[(length1/2)]) / 2;
+}
+else
+{
+median = rollList[length1];
+}
+}
+
+
+if (num === 2)
+{
+median = (rollList[length] + rollList2[0]) / 2;
+}
+
+
+if (num == 3)
+{
+if (length2 % 2 === 0)
+{
+median = (rollList2[(length1/2 + 1)] + rollList2[(length1/2)]) / 2;
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+//broken, need fix;
+function findMode()
+{
+
+if (numFound === 1) 
+{
+one++
+}
+if (numFound === 2) 
+{
+two++
+}
+if (numFound === 3) 
+{
+three++
+}
+if (numFound === 4) 
+{
+four++
+}
+if (numFound === 5) 
+{
+five++
+}
+if (numFound === 6) 
+{
+six++
+}
+
+
+console.log(one);
+console.log(two);
+console.log(three);
+console.log(four);
+console.log(five);
+console.log(six);
+if ((one > two) && (one > three) && (one > four) && (one > five) && (one > six))
+{
+    mode = 1;
+}
+if ((two > one) && (two > three) && (two > four) && (two > five) && (two > six))
+{
+    mode = 2;
+}
+if ((three > two) && (three > one) && (three > four) && (three > five) && (three > six))
+{
+    mode = 3;
+}
+if ((four > two) && (four > three) && (four  > one) && (four > five) && (four) > six)
+{
+    mode = 4;
+}
+if ((five > two) && (five > three) && (five > four) && (one < five) && (five > six))
+{
+    mode = 5;
+}
+if ((six > two) && (six > three) && (six > four) && (six > five) && (one < six))
+{
+    mode = 6;
+}
+
+
+}
+
+
+function findFrequency(value)
+{
+var num  = 0;
+for (let i = 0; i < rollList.length; i++)
+{
+if (rollList[i] === value) {
+  num++;
+}
+}
+frequency = num;
+return frequency;
+}
+function reset()
+{
+const rollList = {};
+var amount = 0;
+var mean = 0;
+var median = 0;
+var mode = 0;
+var frequency = 0;
+var doubleRoll = 0;
+var tripleRoll = 0;
+}
+
+
+function display()
+{
+
+
+
+
+
+}
+</script>
+<style> body
+{
+margin: 0px;
+background-color: whitesmoke;
+display:flex;
+border: 3px solid black;
+}
+
+
+
+div.container
+{
+ font: 20pt bold;
+ padding: 5px;
+ background-color: lightskyblue;
+ margin-bottom: 0px;
+ width: 250px;
+ border: 3px solid black;
+}
+
+button.roll
+{
+ display:center;
+ margin: 7px;
+ margin-top: 0px;
+ padding:5px;
+ width:235px;
+ height: 40px;
+}
+input.roll2
+{
+ margin: 7px;
+ padding:5px;
+ width:235px;
+ height:30px;
+ margin-bottom:0px;
+}
+
+input.roll4
+{
+ margin: 7px;
+ padding:5px;
+ width:235px;
+ height:30px;
+ margin-bottom:0px;
+}
+
+
+div.dices
+{
+ background-color: blue;
+}
+
+#mean
+{
+ background-color:lightcyan;
+ height: 55px;
+ margin: 7px;
+ padding: 5px;
+ 
+}
+
+#median
+{
+ background-color:lightcyan;
+ height: 55px;
+ margin: 7px;
+ padding: 5px;
+}
+#mode
+{
+ background-color:lightcyan;
+ height: 55px;
+ margin: 7px;
+ padding: 5px;
+}
+#doubleRoll
+{
+ background-color:lightcyan;
+ height: 55px;
+ margin: 7px;
+ padding: 5px;
+}
+#tripleRoll
+{
+ background-color:lightcyan;
+ height: 55px;
+ margin: 7px;
+ padding: 5px;
+}
+
+
+#instruct
+{
+background-color:lightcyan;
+ height: 420px;
+ margin: 7px;
+ padding: 5px;
+ font-size: 21px;
+
+}
+
+      div.grid
+  {
+    background-color: lightskyblue;
+    place-content: center;
+   width:950px;
+    padding:100px;
+   margin:10px;
+   background-image:url(images/dices.jpg);
+   background-repeat: no-repeat;
+
+   border: 5px solid black;
+   background-size: 1150px 940px;
+  }
+  div.resultList1
+{
+ font: 20pt bold;
+ padding: 5px;
+ background-color: lightskyblue;
+ 
+ width: 150px;
+ border: 5px solid black;
+}
+       div.resultList2
+{
+ font: 20pt bold;
+ padding: 5px;
+ background-color: lightskyblue;
+
+ width: 150px;
+ border: 5px solid black;
+       }
+       div.resultList3
+{
+ font: 20pt bold;
+ padding: 5px;
+ background-color: lightskyblue;
+
+ width: 150px;
+ border: 5px solid black;
+       }
+#result1
+{
+background-color:lightcyan;
+ height: 860px;
+ margin: 7px;
+ padding: 5px;
+ font-size: 20px;
+ overflow-y:scroll;
+}
+
+
+#result2
+{
+background-color:lightcyan;
+ height: 860px;
+ margin: 7px;
+ padding: 5px;
+ font-size: 20px;
+ overflow-y:scroll;
+ 
+}
+#result3
+{
+background-color:lightcyan;
+ height: 860px;
+ margin: 7px;
+ padding: 5px;
+ font-size: 20px;
+ overflow-y:scroll;
+}
+
+#change1
+{
+margin:3px;
+padding:5px;
+border: 3px solid black;
+background: lightcyan;
+}
+#change2
+{
+margin:3px;
+padding:5px;
+border: 3px solid black;
+background: lightcyan;
+}
+#change3
+{
+margin:3px;
+padding:5px;
+border: 3px solid black;
+background: lightcyan;
+}
+
+form.form1
+{
+    margin-bottom:5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+   
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<head>
+<body>
+<div class = "container">
+
+<form class = "form1">
+    
+    <input id = "dice" placeholder = "Amount of Dice to Roll" class = "roll2">
+      <input id = "threeDice" placeholder = "How many dices?" class = "roll4">
+ 
+</form>
+<button onclick = "checkDie()" class = "roll"> Click here to roll Dice!</button>
+</br>
+<div class = "values">
+<p id = "mean"> Mean value: 0 </p>
+
+<p id = "median"> Median Value: 0</p>
+
+
+
+
+
+
+
+
+<p id = "mode"> Mode value: 0</p>
+
+
+
+
+
+
+
+
+<p id = "doubleRoll"> Double Rolls: 0</p>
+
+
+
+
+
+
+
+
+<p id = "tripleRoll"> Triple Rolls: 0</p>
+
+<p id = "instruct"> International dice expert, Danielle Danziger needs to run some numbers on some dice rolls.
+  She’s decided to hire you to create a web page for her that will roll a whole bunch of dice and
+  report the very important results. She wants to be able to run a test with 1, 2, or 3 dice and she
+  wants to know the following: mean, median, mode, double rolls, triple rolls, and frequency.
+  </p>
+</div>
+
+</div>
+<div class= "grid">
+
+
+
+
+
+
+
+
+  </div>
+   
+</div>
+
+<div class = "resultList1">
+  <div id = "change1">Dice 1 </div>
+  <p id = "result1">
+
+  </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class = "resultList2">
+    <div id = "change2"> Dice 2 </div>
+    <p id = "result2">
+
+    </p>
+    </div>
+</div>
+<div class = "resultList3">
+    <div id = "change3"> Dice 3 </div>
+    <p id = "result3">
+
+    </p>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
